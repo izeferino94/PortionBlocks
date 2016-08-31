@@ -4,18 +4,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="edu.izeferinucsd.portionblocks.MainActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/planList"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="420dp"
         >
 
     </android.support.v7.widget.RecyclerView>
+
+    <Button style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:text="New Plan"
+        android:id="@+id/button"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+
 
 
 </RelativeLayout>
