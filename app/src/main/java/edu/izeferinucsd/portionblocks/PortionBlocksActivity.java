@@ -4,15 +4,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TableRow;
 
 
 public class PortionBlocksActivity extends AppCompatActivity {
+    private RelativeLayout relativeLayout;
     private Button addColumn, addRow;
     private int[] colors = {0xFFAE69AE, 0xFF0080FF, 0xFFCCFFCC, 0xFFFF7373, 0xFFEEAEEE};
     private int[] colorsp90x = {0xFFA54A0B, 0xFF89A29F, 0xFF920D76, 0xFF486911, 0xFFF5CC3F,
@@ -28,11 +31,17 @@ public class PortionBlocksActivity extends AppCompatActivity {
         addRow = (Button) findViewById(R.id.newRowButton);
         addColumn = (Button) findViewById(R.id.newColumnButton);
         final LinearLayout portionView = (LinearLayout) findViewById(R.id.portion_view);
+        relativeLayout = (RelativeLayout) findViewById(R.id.rl);
 
 
         addRow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                PortionBlockDialog dialog = new PortionBlockDialog();
+                dialog.show(getSupportFragmentManager(), "portion_dialog");
+
+
                 if(blockAdded) {
                     blockAdded = !blockAdded;
                     ++i;
@@ -73,5 +82,7 @@ public class PortionBlocksActivity extends AppCompatActivity {
         });
 
     }
+
+
 
 }
