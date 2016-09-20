@@ -1,23 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <EditText
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText4"
-        android:text="Portion Name" />
+        android:layout_marginTop="8dp"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/portion_name"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/name" />
+
+    <TextView
+        android:text="Portion Name:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+
+        android:id="@+id/name"
+        android:textSize="20sp"
+        android:layout_alignBaseline="@+id/portion_name"
+        android:layout_alignBottom="@+id/portion_name"
+        android:layout_alignParentStart="true"
+        />
 
     <EditText
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText5"
-        android:text="Number of Portions" />
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/num_of_portions"
+        android:layout_below="@+id/portion_name"
+        android:layout_toEndOf="@+id/number" />
+
+    <TextView
+        android:text="Number of Portions:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:id="@+id/number"
+        android:textSize="20sp"
+        android:layout_alignBaseline="@+id/num_of_portions"
+        android:layout_alignBottom="@+id/num_of_portions"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="Calories Per Portion:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_alignBottom="@+id/cal_per_portion"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/calories"
+        android:textSize="20sp" />
 
     <EditText
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText6"
-        android:text="Calories Per Portion" />
-</LinearLayout>
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/cal_per_portion"
+        android:layout_below="@+id/num_of_portions"
+        android:layout_toEndOf="@+id/calories" />
+</RelativeLayout>
