@@ -12,27 +12,19 @@ android:id="@+id/rl"
 tools:context="edu.izeferinucsd.portionblocks.PortionBlocksActivity">
 
 
-<Button
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Add Column"
-    android:id="@+id/newColumnButton"
-    android:layout_alignParentBottom="true"
-    android:layout_alignParentEnd="true" />
-
     <ScrollView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
         android:id="@+id/portion_plan_view">
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/portion_view">
-    </LinearLayout>
-</ScrollView>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/portion_view">
+        </LinearLayout>
+    </ScrollView>
 
     <Button
         android:layout_width="wrap_content"
@@ -40,8 +32,7 @@ tools:context="edu.izeferinucsd.portionblocks.PortionBlocksActivity">
         android:text="Add Row"
         android:id="@+id/newRowButton"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/portion_plan_view"
-        />
+        android:layout_below="@+id/portion_plan_view" />
 
 
 </RelativeLayout>
