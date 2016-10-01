@@ -3,15 +3,14 @@ package edu.izeferinucsd.portionblocks;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TableRow;
+import android.widget.TextView;
 
 
-public class PortionBlocksActivity extends AppCompatActivity {
+public class PortionBlocksActivity extends AppCompatActivity implements UserInputObserver{
     private LinearLayout portionView;
     private Button  addRow;
     private int[] colors = {0xFFAE69AE, 0xFF0080FF, 0xFFCCFFCC, 0xFFFF7373, 0xFFEEAEEE};
@@ -21,6 +20,13 @@ public class PortionBlocksActivity extends AppCompatActivity {
     private PortionBlockDialog dialog;
     private HorizontalScrollView portionClass;
     private TableRow row;
+    private String portionName;
+    private TextView tv;
+
+    public PortionBlocksActivity()
+    {
+
+    }
 
 
     @Override
@@ -30,6 +36,7 @@ public class PortionBlocksActivity extends AppCompatActivity {
 
         addRow = (Button) findViewById(R.id.newRowButton);
         portionView = (LinearLayout) findViewById(R.id.portion_view);
+        tv = new TextView(PortionBlocksActivity.this);
 
 
         addRow.setOnClickListener(new View.OnClickListener() {
@@ -37,16 +44,29 @@ public class PortionBlocksActivity extends AppCompatActivity {
             public void onClick(View v) {
                 ++i;
                 i = i == 6 ? 0 : i;
+                portionView.addView(tv);
                 portionClass = new HorizontalScrollView(PortionBlocksActivity.this);
                 row = new TableRow(PortionBlocksActivity.this);
                 row.setPadding(0, 10, 0, 10);
                 portionClass.setHorizontalScrollBarEnabled(false);
                 portionView.addView(portionClass);
                 portionClass.addView(row);
-                dialog = new PortionBlockDialog(getApplicationContext(), row, colorsp90x, i);
+                dialog = new PortionBlockDialog(getApplicationContext(), row, colorsp90x, i,tv);
+                dialog.registerObserver(PortionBlocksActivity.this);
                 dialog.show(getSupportFragmentManager(), "portion_dialog");
 
             }
         });
     }
+
+    public LinearLayout getPortionView()
+    {
+        return portionView;
+    }
+
+    public void update()
+    {
+        tv.setText(dialog.getPortionName());
+    }
+
 }
