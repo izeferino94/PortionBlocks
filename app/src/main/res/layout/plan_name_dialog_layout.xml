@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:id="@+id/portion_plan_name"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/plan_name" />
+
+    <TextView
+        android:text="Plan Name:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+
+        android:id="@+id/plan_name"
+        android:textSize="20sp"
+        android:layout_alignBaseline="@+id/portion_plan_name"
+        android:layout_alignBottom="@+id/portion_plan_name"
+        android:layout_alignParentStart="true"
+        />
+</RelativeLayout>

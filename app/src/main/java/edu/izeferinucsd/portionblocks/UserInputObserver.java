@@ -5,5 +5,5 @@ package edu.izeferinucsd.portionblocks;
  */
 
 public interface UserInputObserver {
-    void update ();
+    void update (int returnCode);
 }

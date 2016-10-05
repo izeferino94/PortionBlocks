@@ -34,5 +34,13 @@ tools:context="edu.izeferinucsd.portionblocks.PortionBlocksActivity">
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/portion_plan_view" />
 
+    <Button
+        android:text="Save Plan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/save_plan" />
+
 
 </RelativeLayout>

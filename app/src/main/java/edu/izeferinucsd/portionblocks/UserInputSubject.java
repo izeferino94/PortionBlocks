@@ -7,5 +7,5 @@ package edu.izeferinucsd.portionblocks;
 public interface UserInputSubject {
     void registerObserver(UserInputObserver observer);
     void removeObserver();
-    void notifyObserver();
+    void notifyObserver(int returnCode);
 }

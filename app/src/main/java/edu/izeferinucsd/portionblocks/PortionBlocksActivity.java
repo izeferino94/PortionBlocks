@@ -13,11 +13,12 @@ import android.widget.TextView;
 
 public class PortionBlocksActivity extends AppCompatActivity implements UserInputObserver{
     private LinearLayout portionView;
-    private Button  addRow;
+    private Button  addRow, savePlan;
     private int[] colorsp90x = {0xFFA54A0B, 0xFF89A29F, 0xFF920D76, 0xFF486911, 0xFFF5CC3F,
                                 0xFFB3846E};
     private int colorCounter = -1;
     private PortionBlockDialog dialog;
+    private PortionPlanNameDialog savePlanDialog;
     private HorizontalScrollView portionClass;
     private TableRow row;
     private TextView portionHeader;
@@ -60,13 +61,29 @@ public class PortionBlocksActivity extends AppCompatActivity implements UserInpu
 
             }
         });
+
+        savePlan = (Button) findViewById(R.id.save_plan);
+        savePlan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                savePlanDialog = new PortionPlanNameDialog();
+                savePlanDialog.show(getSupportFragmentManager(), "plan_name_dialog");
+            }
+        });
     }
-    public void update()
+    public void update(int returnCode)
     {
-        portionHeader.setText(dialog.getPortionName());
-        caloriesPerPortion = dialog.getCaloriesPerPortion();
-        portionCount = dialog.getPortionCount();
-        generateBlocks();
+        if(returnCode == 1) {
+            portionHeader.setText(dialog.getPortionName() + ": " + Integer.toString((dialog.getCaloriesPerPortion())));
+            caloriesPerPortion = dialog.getCaloriesPerPortion();
+            portionCount = dialog.getPortionCount();
+            generateBlocks();
+        }
+        else if(returnCode == 0)
+        {
+            portionView.removeView(portionClass);
+            portionView.removeView(portionHeader);
+        }
     }
 
     private void generateBlocks()

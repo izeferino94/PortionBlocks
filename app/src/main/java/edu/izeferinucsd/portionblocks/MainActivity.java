@@ -9,21 +9,26 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView plansList;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     FloatingActionButton fab;
-    String[] testText1 = new String[1];
-    String[] testText = {"low carb", "high energy", "diet", "bulking", "lean", "dgaf", "cheat day", "regular", "1more", "and another"};
+    static String[] testText1 = new String[1];
+    static String[] testText = {"low carb", "high energy", "diet", "bulking", "lean", "dgaf", "cheat day", "regular", "1more", "and another"};
+    static List<String> portionPlans;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        portionPlans = new ArrayList<String>();
         plansList = (RecyclerView)findViewById(R.id.planList);
-        adapter = new PlanListAdapter(testText);
+        adapter = new PlanListAdapter(testText1);
         layoutManager = new LinearLayoutManager(this);
         plansList.setLayoutManager(layoutManager);
         plansList.setHasFixedSize(true);
