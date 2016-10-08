@@ -22,7 +22,6 @@ public class PortionBlockDialog extends DialogFragment implements UserInputSubje
     private View portionDialog;
     private UserInputObserver observer;
 
-
     private String portionName;
     private int caloriesPerPortion, portionCount;
 

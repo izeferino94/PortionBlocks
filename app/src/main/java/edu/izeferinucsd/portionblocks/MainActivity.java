@@ -18,17 +18,15 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     FloatingActionButton fab;
-    static String[] testText1 = new String[1];
-    static String[] testText = {"low carb", "high energy", "diet", "bulking", "lean", "dgaf", "cheat day", "regular", "1more", "and another"};
-    static List<String> portionPlans;
+    private ArrayList<String> testText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        portionPlans = new ArrayList<String>();
+        testText = new ArrayList<>();
         plansList = (RecyclerView)findViewById(R.id.planList);
-        adapter = new PlanListAdapter(testText1);
+        adapter = new PlanListAdapter(testText);
         layoutManager = new LinearLayoutManager(this);
         plansList.setLayoutManager(layoutManager);
         plansList.setHasFixedSize(true);
@@ -37,8 +35,23 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, PortionBlocksActivity.class));
+                Intent intent = new Intent(MainActivity.this, PortionBlocksActivity.class);
+                startActivityForResult(intent, 1);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == 1) {
+            if(resultCode == Activity.RESULT_OK){
+                testText.add(data.getStringExtra("PlanName"));
+                plansList.setAdapter(adapter);
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //NOCODE YET
+            }
+        }
     }
 }

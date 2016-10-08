@@ -18,6 +18,7 @@ public class PortionPlanNameDialog extends DialogFragment implements UserInputSu
     private LayoutInflater inflater;
     private View portionPlanName;
     private String planName;
+    private UserInputObserver observer;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -29,7 +30,7 @@ public class PortionPlanNameDialog extends DialogFragment implements UserInputSu
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 planName = ((EditText)portionPlanName.findViewById(R.id.portion_plan_name)).getText().toString();
-                MainActivity.testText1[0] = planName;
+                notifyObserver(2);
             }
         }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
@@ -40,7 +41,9 @@ public class PortionPlanNameDialog extends DialogFragment implements UserInputSu
         return builder.create();
     }
 
-    public void registerObserver(UserInputObserver observer) {}
+    public void registerObserver(UserInputObserver observer) { this.observer = observer; }
     public void removeObserver() {}
-    public void notifyObserver(int returnCode) {}
+    public void notifyObserver(int returnCode) { observer.update(returnCode); }
+    public String getPlanName() { return planName; }
+
 }

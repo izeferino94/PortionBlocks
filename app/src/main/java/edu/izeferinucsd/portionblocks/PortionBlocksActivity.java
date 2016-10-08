@@ -1,5 +1,7 @@
 package edu.izeferinucsd.portionblocks;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -67,6 +69,7 @@ public class PortionBlocksActivity extends AppCompatActivity implements UserInpu
             @Override
             public void onClick(View view) {
                 savePlanDialog = new PortionPlanNameDialog();
+                savePlanDialog.registerObserver(PortionBlocksActivity.this);
                 savePlanDialog.show(getSupportFragmentManager(), "plan_name_dialog");
             }
         });
@@ -83,6 +86,13 @@ public class PortionBlocksActivity extends AppCompatActivity implements UserInpu
         {
             portionView.removeView(portionClass);
             portionView.removeView(portionHeader);
+        }
+        else if(returnCode == 2)
+        {
+            Intent returnIntent = new Intent();
+            returnIntent.putExtra("PlanName", savePlanDialog.getPlanName());
+            setResult(Activity.RESULT_OK, returnIntent);
+            finish();
         }
     }
 

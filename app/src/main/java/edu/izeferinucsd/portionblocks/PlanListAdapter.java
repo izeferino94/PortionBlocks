@@ -6,14 +6,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 /**
  * Created by Isaias on 8/29/2016.
  */
 public class PlanListAdapter extends RecyclerView.Adapter<PlanListAdapter.PlanListHolder> {
 
-    String[] planNames;
+    ArrayList<String> planNames;
 
-    public PlanListAdapter(String[] planNames) {
+    public PlanListAdapter(ArrayList<String> planNames) {
         this.planNames = planNames;
     }
 
@@ -26,13 +28,13 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListAdapter.PlanLi
 
     @Override
     public void onBindViewHolder(PlanListHolder holder, int position) {
-        holder.textName.setText(planNames[position]);
+        holder.textName.setText(planNames.get(position));
     }
 
     @Override
     public int getItemCount()
     {
-        return planNames.length;
+        return planNames.size();
     }
 
     public  static class PlanListHolder extends RecyclerView.ViewHolder
