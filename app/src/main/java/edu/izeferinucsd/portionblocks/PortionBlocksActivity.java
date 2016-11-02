@@ -12,6 +12,8 @@ import android.widget.LinearLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.firebase.client.Firebase;
+
 
 public class PortionBlocksActivity extends AppCompatActivity implements UserInputObserver{
     private LinearLayout portionView;
@@ -28,6 +30,8 @@ public class PortionBlocksActivity extends AppCompatActivity implements UserInpu
     private String portionName;
     private int caloriesPerPortion, portionCount;
 
+    private Firebase mRef;
+
     public PortionBlocksActivity()
     {
         super();
@@ -38,6 +42,8 @@ public class PortionBlocksActivity extends AppCompatActivity implements UserInpu
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_portion_blocks);
+        Firebase.setAndroidContext(this);
+        mRef = new Firebase("https://portionblocks.firebaseio.com/");
 
         addRow = (Button) findViewById(R.id.newRowButton);
         portionView = (LinearLayout) findViewById(R.id.portion_view);
@@ -80,6 +86,11 @@ public class PortionBlocksActivity extends AppCompatActivity implements UserInpu
             portionHeader.setText(dialog.getPortionName() + ": " + Integer.toString((dialog.getCaloriesPerPortion())));
             caloriesPerPortion = dialog.getCaloriesPerPortion();
             portionCount = dialog.getPortionCount();
+            mRef.child("TempPortionClass").child("ClassName").setValue("Prot");
+            mRef.child("TempPortionClass").child("NumberOfPortions").setValue(portionCount);
+            mRef.child("TempPortionClass").child("CaloriesPerPortion").setValue(caloriesPerPortion);
+            //Firebase mRefChild = mRef.child("TempPortionClass");
+            //mRefChild.setValue("TempClass");
             generateBlocks();
         }
         else if(returnCode == 0)

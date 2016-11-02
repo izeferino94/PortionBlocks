@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
+import com.firebase.client.Firebase;
+
 
 /**
  * Created by Isaiah on 9/18/2016.
