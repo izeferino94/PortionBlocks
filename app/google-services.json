@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "289853870900",
+    "firebase_url": "https://portionblocks.firebaseio.com",
+    "project_id": "portionblocks",
+    "storage_bucket": "portionblocks.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:289853870900:android:3255f802ce0f46b2",
+        "android_client_info": {
+          "package_name": "edu.izeferinucsd.portionblocks"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "289853870900-f4l6g2sf5faip63uddq3kkog6lg2bejh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.izeferinucsd.portionblocks",
+            "certificate_hash": "AEC6077F356248B64EFFB96D8240ECEA277D2DE7"
+          }
+        },
+        {
+          "client_id": "289853870900-q53ssg04f3r69ic2v3urdd7h9rf8kapp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPuvQ66Gv32srfNxJ53rgnHYzujq-kuaw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "289853870900-sf744qosa1p26gr59rp15nnso7844p9h.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "edu.izeferinucsd.portionblocks"
+              }
+            },
+            {
+              "client_id": "289853870900-q53ssg04f3r69ic2v3urdd7h9rf8kapp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
