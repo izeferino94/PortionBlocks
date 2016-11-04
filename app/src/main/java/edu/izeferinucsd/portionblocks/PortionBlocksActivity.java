@@ -12,8 +12,10 @@ import android.widget.LinearLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
-
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 
 public class PortionBlocksActivity extends AppCompatActivity implements UserInputObserver{
     private LinearLayout portionView;
@@ -84,11 +86,13 @@ public class PortionBlocksActivity extends AppCompatActivity implements UserInpu
     {
         if(returnCode == 1) {
             portionHeader.setText(dialog.getPortionName() + ": " + Integer.toString((dialog.getCaloriesPerPortion())));
+            portionName = dialog.getPortionName();
             caloriesPerPortion = dialog.getCaloriesPerPortion();
             portionCount = dialog.getPortionCount();
-            mRef.child("TempPortionClass").child("ClassName").setValue("Prot");
-            mRef.child("TempPortionClass").child("NumberOfPortions").setValue(portionCount);
-            mRef.child("TempPortionClass").child("CaloriesPerPortion").setValue(caloriesPerPortion);
+            mRef.child("TempPortionPlan");
+            mRef.child("TempPortionPlan").child(portionName).child("ClassName").setValue(portionName);
+            mRef.child("TempPortionPlan").child(portionName).child("NumberOfPortions").setValue(portionCount);
+            mRef.child("TempPortionPlan").child(portionName).child("CaloriesPerPortion").setValue(caloriesPerPortion);
             //Firebase mRefChild = mRef.child("TempPortionClass");
             //mRefChild.setValue("TempClass");
             generateBlocks();
@@ -100,6 +104,19 @@ public class PortionBlocksActivity extends AppCompatActivity implements UserInpu
         }
         else if(returnCode == 2)
         {
+            mRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot snapshot) {
+                    for (DataSnapshot child : snapshot.getChildren()) {
+                        if(child.getKey().equals("TempPortionPlan")) {
+                            mRef.child(savePlanDialog.getPlanName()).setValue(savePlanDialog.getPlanName());
+                        }
+                    }
+                }
+                @Override
+                public void onCancelled(FirebaseError error) {}
+            }
+            );
             Intent returnIntent = new Intent();
             returnIntent.putExtra("PlanName", savePlanDialog.getPlanName());
             setResult(Activity.RESULT_OK, returnIntent);
