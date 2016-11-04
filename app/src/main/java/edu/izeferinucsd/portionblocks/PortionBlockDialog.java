@@ -26,6 +26,7 @@ public class PortionBlockDialog extends DialogFragment implements UserInputSubje
 
     private String portionName;
     private int caloriesPerPortion, portionCount;
+    private Portion portion;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -41,6 +42,7 @@ public class PortionBlockDialog extends DialogFragment implements UserInputSubje
                                     .getText().toString());
                 portionCount = Integer.parseInt(((EditText) portionDialog.findViewById(R.id.num_of_portions))
                                    .getText().toString());
+                portion = new Portion(portionName, portionCount, caloriesPerPortion);
                 notifyObserver(1);
 
             }
@@ -77,4 +79,6 @@ public class PortionBlockDialog extends DialogFragment implements UserInputSubje
     public int getCaloriesPerPortion() { return caloriesPerPortion; }
 
     public int getPortionCount() { return portionCount; }
+
+    public Portion getPortion() { return portion; }
 }

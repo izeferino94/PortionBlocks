@@ -12,4 +12,8 @@ public class PortionPlan {
     public PortionPlan() {
         portionPlan = new ArrayList<>();
     }
+
+    public void addPortion(Portion portion) {
+        portionPlan.add(portion);
+    }
 }

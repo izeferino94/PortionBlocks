@@ -31,6 +31,8 @@ public class PortionBlocksActivity extends AppCompatActivity implements UserInpu
 
     private String portionName;
     private int caloriesPerPortion, portionCount;
+    private Portion portion;
+    private PortionPlan portionPlan;
 
     private Firebase mRef;
 
@@ -46,6 +48,8 @@ public class PortionBlocksActivity extends AppCompatActivity implements UserInpu
         setContentView(R.layout.activity_portion_blocks);
         Firebase.setAndroidContext(this);
         mRef = new Firebase("https://portionblocks.firebaseio.com/");
+        portionPlan = new PortionPlan();
+        mRef.child("TempPortionPlan").setValue(portionPlan);
 
         addRow = (Button) findViewById(R.id.newRowButton);
         portionView = (LinearLayout) findViewById(R.id.portion_view);
@@ -85,16 +89,15 @@ public class PortionBlocksActivity extends AppCompatActivity implements UserInpu
     public void update(int returnCode)
     {
         if(returnCode == 1) {
+            //TODO use proper update command from firebase
+            portion = dialog.getPortion();
+            portionPlan.addPortion(portion);
+
+            mRef.child("TempPortionPlan").setValue(portionPlan);
             portionHeader.setText(dialog.getPortionName() + ": " + Integer.toString((dialog.getCaloriesPerPortion())));
             portionName = dialog.getPortionName();
             caloriesPerPortion = dialog.getCaloriesPerPortion();
             portionCount = dialog.getPortionCount();
-            mRef.child("TempPortionPlan");
-            mRef.child("TempPortionPlan").child(portionName).child("ClassName").setValue(portionName);
-            mRef.child("TempPortionPlan").child(portionName).child("NumberOfPortions").setValue(portionCount);
-            mRef.child("TempPortionPlan").child(portionName).child("CaloriesPerPortion").setValue(caloriesPerPortion);
-            //Firebase mRefChild = mRef.child("TempPortionClass");
-            //mRefChild.setValue("TempClass");
             generateBlocks();
         }
         else if(returnCode == 0)
