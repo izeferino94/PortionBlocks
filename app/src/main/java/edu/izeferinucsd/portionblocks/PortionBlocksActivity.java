@@ -12,6 +12,10 @@ import android.widget.LinearLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 
 public class PortionBlocksActivity extends AppCompatActivity implements UserInputObserver{
     private LinearLayout portionView;
@@ -27,6 +31,10 @@ public class PortionBlocksActivity extends AppCompatActivity implements UserInpu
 
     private String portionName;
     private int caloriesPerPortion, portionCount;
+    private Portion portion;
+    private PortionPlan portionPlan;
+
+    private Firebase mRef;
 
     public PortionBlocksActivity()
     {
@@ -38,6 +46,10 @@ public class PortionBlocksActivity extends AppCompatActivity implements UserInpu
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_portion_blocks);
+        Firebase.setAndroidContext(this);
+        mRef = new Firebase("https://portionblocks.firebaseio.com/");
+        portionPlan = new PortionPlan();
+        mRef.child("TempPortionPlan").setValue(portionPlan);
 
         addRow = (Button) findViewById(R.id.newRowButton);
         portionView = (LinearLayout) findViewById(R.id.portion_view);
@@ -77,7 +89,13 @@ public class PortionBlocksActivity extends AppCompatActivity implements UserInpu
     public void update(int returnCode)
     {
         if(returnCode == 1) {
+            //TODO use proper update command from firebase
+            portion = dialog.getPortion();
+            portionPlan.addPortion(portion);
+
+            mRef.child("TempPortionPlan").setValue(portionPlan);
             portionHeader.setText(dialog.getPortionName() + ": " + Integer.toString((dialog.getCaloriesPerPortion())));
+            portionName = dialog.getPortionName();
             caloriesPerPortion = dialog.getCaloriesPerPortion();
             portionCount = dialog.getPortionCount();
             generateBlocks();
@@ -89,6 +107,19 @@ public class PortionBlocksActivity extends AppCompatActivity implements UserInpu
         }
         else if(returnCode == 2)
         {
+            mRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot snapshot) {
+                    for (DataSnapshot child : snapshot.getChildren()) {
+                        if(child.getKey().equals("TempPortionPlan")) {
+                            mRef.child(savePlanDialog.getPlanName()).setValue(savePlanDialog.getPlanName());
+                        }
+                    }
+                }
+                @Override
+                public void onCancelled(FirebaseError error) {}
+            }
+            );
             Intent returnIntent = new Intent();
             returnIntent.putExtra("PlanName", savePlanDialog.getPlanName());
             setResult(Activity.RESULT_OK, returnIntent);
